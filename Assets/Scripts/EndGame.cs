@@ -1,4 +1,5 @@
 using System.Collections;
+using Games;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,6 +42,7 @@ public class EndGame : MonoBehaviour
         LeanTween.moveLocalY(star5, 120 , moveTime).setEase(LeanTweenType.easeOutBack);
         
         yield return new WaitForSeconds(onScreenTime);
+        Indicator.Instance.HideSign();
         
         LeanTween.moveLocalY(star4, -1000 , moveTime).setEase(LeanTweenType.easeInBack);
         yield return new WaitForSeconds(waitTime);

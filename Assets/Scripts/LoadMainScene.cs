@@ -7,19 +7,23 @@ using UnityEngine.UI;
 
 public class LoadMainScene : MonoBehaviour
 {
+    [SerializeField] private GameObject playShake, loadShake;
+    [SerializeField] private float rotateAmount, rotateTime;
     [SerializeField] private Button playButton, loadButton;
     [SerializeField] private BarFill barFill;
     [SerializeField] private float barMoveTime;
-    private bool _hasLoadButton;
+    private bool _hasLoadButton, _hasPlayButton = true;
 
     private void Awake()
     {
         playButton.onClick.AddListener(OnStartPlay);
+        LeanTween.rotateZ(playShake, rotateAmount, rotateTime).setEase(LeanTweenType.easeInOutQuad).setLoopPingPong();
+        LeanTween.rotateZ(loadShake, rotateAmount, rotateTime).setEase(LeanTweenType.easeInOutQuad).setLoopPingPong();
     }
 
     private void OnStartPlay()
     {
-        LeanTween.moveLocalY(playButton.gameObject, -1000, barMoveTime).setEase(LeanTweenType.easeInBack);
+        LeanTween.moveLocalY(playShake, -1000, barMoveTime).setEase(LeanTweenType.easeInBack).setOnComplete(() => _hasPlayButton = false);
         barFill.BarStatus(true);
         StartCoroutine(LoadScene());
     }
@@ -42,10 +46,10 @@ public class LoadMainScene : MonoBehaviour
             barFill.Fill(asyncOperation.progress);
 
             // Check if the load has finished
-            if (asyncOperation.progress >= 0.9f && !_hasLoadButton)
+            if (asyncOperation.progress >= 0.9f && !_hasLoadButton && !_hasPlayButton)
             {
                 _hasLoadButton = true;
-                LeanTween.moveLocalY(loadButton.gameObject, -100, barMoveTime).setEase(LeanTweenType.easeOutBack);
+                LeanTween.moveLocalY(loadShake, -100, barMoveTime).setEase(LeanTweenType.easeOutBack);
             }
             
             yield return null;

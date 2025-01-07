@@ -5,16 +5,24 @@ using UnityEngine;
 
 public class PointText : MonoBehaviour
 {
+    [Serializable]
+    private struct Text
+    {
+        public Color color;
+        public TMP_FontAsset font;
+    }
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private float jumpHeight, jumpTime;
     [SerializeField] private float fadeTime;
     [SerializeField] private Transform parentOnTop;
+    [SerializeField] private Text negativeText, normalText;
     private Action _onFinished;
 
     public void AddOnFinished(Action onFinished) => _onFinished = onFinished;
-    public void SetText(string newText,Color color,Transform parent)
+    public void SetText(string newText,bool positive,Transform parent)
     {
-        text.color = color;
+        text.color = positive ? normalText.color : negativeText.color;
+        text.font = positive ? normalText.font : negativeText.font;
         text.text = newText;
         parentOnTop = parent;
     }

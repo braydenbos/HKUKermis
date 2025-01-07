@@ -43,7 +43,8 @@ public class CameraMovement : MonoBehaviour
     public void LookAtGame(Transform target, Action oncomplete)
     {
         LeanTween.rotateX(gameObject, 8, moveToGameTime).setEase(LeanTweenType.easeInOutExpo);
-        LeanTween.move(gameObject, target.position + offset, moveToGameTime).setEase(LeanTweenType.easeInOutExpo).setOnComplete(oncomplete.Invoke);
+        LeanTween.move(gameObject, target.position + offset, moveToGameTime).setEase(LeanTweenType.easeInOutExpo).
+            setOnComplete(oncomplete.Invoke);
         
         if (_moving == null) return;
         StopCoroutine(_moving);
@@ -51,10 +52,11 @@ public class CameraMovement : MonoBehaviour
 
     }
 
-    public void lookAtPlayer()
+    public void LookAtPlayer(Action oncomplete)
     {
         LeanTween.rotateX(gameObject, _rotationX, moveToGameTime).setEase(LeanTweenType.easeInOutExpo);
         LeanTween.moveY(gameObject, _startPosition.x, moveToGameTime).setEase(LeanTweenType.easeInOutExpo);
-        LeanTween.moveZ(gameObject, _startPosition.y, moveToGameTime).setEase(LeanTweenType.easeInOutExpo);
+        LeanTween.moveZ(gameObject, _startPosition.y, moveToGameTime).setEase(LeanTweenType.easeInOutExpo).
+            setOnComplete(oncomplete.Invoke);
     }
 }

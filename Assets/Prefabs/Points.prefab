@@ -76,8 +76,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283352809
-  m_fontColor: {r: 0.9150943, g: 0.77682084, b: 0.30647027, a: 1}
+    rgba: 4284113895
+  m_fontColor: {r: 0.90588236, g: 0.38792452, b: 0.35294116, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -153,3 +153,9 @@ MonoBehaviour:
   jumpTime: 2
   fadeTime: 0.5
   parentOnTop: {fileID: 0}
+  negativeText:
+    color: {r: 0.90588236, g: 0.3882353, b: 0.3529412, a: 1}
+    font: {fileID: 11400000, guid: 68d4e4295ddc58c4f8a63222150fc1b1, type: 2}
+  normalText:
+    color: {r: 0.90588236, g: 0.8117647, b: 0.3529412, a: 1}
+    font: {fileID: 11400000, guid: 5348d5dc6b5cdb345b2a4b20403b1d04, type: 2}

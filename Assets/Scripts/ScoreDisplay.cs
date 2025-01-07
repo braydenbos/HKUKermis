@@ -1,11 +1,18 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 
 public class ScoreDisplay : MonoBehaviour
 {
+    [Serializable]
+    private struct Text
+    {
+        public Color color;
+        public TMP_FontAsset font;
+    }
     [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private Color thousandTextColor, normalTextColor;
+    [SerializeField] private Text thousandText, normalText;
     [SerializeField] private PointTextManager pointTextManager;
     [SerializeField] private float scoreTimer;
     private float _displayScore;
@@ -24,7 +31,8 @@ public class ScoreDisplay : MonoBehaviour
             currentScore += current;
             _displayScore += current;
             scoreText.text = $"{_displayScore:0}";
-            scoreText.color = _displayScore > 999 ? thousandTextColor : normalTextColor;
+            scoreText.color = _displayScore > 999 ? thousandText.color : normalText.color;
+            scoreText.font = _displayScore > 999 ? thousandText.font : normalText.font;
             yield return null;
         }
 

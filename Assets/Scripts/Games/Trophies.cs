@@ -1,15 +1,15 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Games
 {
     public class Trophies : GameBase
     {
-        public bool _hasGun = true;
+        public bool hasGun = true;
         private CameraMovement _mainCamera;
         [SerializeField] private GameBooth[] allBooths;
-        [SerializeField] private ExitIndicator exitIndicator;
 
         private void Awake()
         {
@@ -31,14 +31,14 @@ namespace Games
         {
             IsActive = true;
             PlayerController.Instance.OnShoot += ShootTarget;
-            exitIndicator.EnterShop();
+            Indicator.Instance.ShowSign("EXIT");
             
-            while(!Input.GetKeyDown(KeyCode.E) && _hasGun)
+            while(!Input.GetKeyDown(KeyCode.E) && hasGun)
             {
                 yield return null;
             }
             
-            exitIndicator.ExitShop();
+            Indicator.Instance.HideSign();
 
             PlayerController.Instance.OnShoot -= ShootTarget;
             
@@ -46,7 +46,7 @@ namespace Games
             GameManager.Instance.ExitGame();
             MouseController.Instance.OnGameExit();
             TimeMultiplier = 1;
-            if (_hasGun) yield break;
+            if (hasGun) yield break;
             foreach (var booth in allBooths)
                 Destroy(booth);
         }
