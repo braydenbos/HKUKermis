@@ -23,13 +23,13 @@ Material:
   m_Name: 29 ORANGE-LIGHT-LPUP
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 2100000, guid: 42caffe1132386f4daa037a9663088b9, type: 2}
-  m_ModifiedSerializedProperties: 0
+  m_ModifiedSerializedProperties: 8
   m_ValidKeywords:
   - _SPECULAR_SETUP
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
+  m_DoubleSidedGI: 1
   m_CustomRenderQueue: -1
   stringTagMap:
     RenderType: Opaque
@@ -39,7 +39,8 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _Cull: 0
     m_Colors:
     - _BaseColor: {r: 0.98039216, g: 0.6509804, b: 0.1764706, a: 1}
     - _Color: {r: 0.98039216, g: 0.6509804, b: 0.17647055, a: 1}

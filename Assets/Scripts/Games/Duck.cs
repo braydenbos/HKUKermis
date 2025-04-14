@@ -31,6 +31,7 @@ namespace Games
                 _duckies.Add(item);
                 item.SetScore(Random.Range(score.min, score.max));
                 LeanTween.move(item.gameObject,endPoint.position,duckMoveTime).setOnComplete(() => RemoveDucky(item));
+                LeanTween.moveY(item.gameObject,item.transform.position.y+0.1f,1f).setEase(LeanTweenType.easeInOutQuad).setLoopPingPong();
                 yield return new WaitForSeconds(waitTime);
             }
 

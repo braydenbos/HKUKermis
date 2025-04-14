@@ -20,12 +20,12 @@ public class EndGun : MonoBehaviour
     {
         var clip = audioClips[Random.Range(0, audioClips.Length)];
         audioSource.PlayOneShot(clip);
-        var rotation = bulletSpawn.rotation;
-        var newRotation = new Vector3(rotation.x-90, rotation.y, rotation.z);
-        var newBullet = Instantiate(bullet, bulletSpawn.position, Quaternion.Euler(newRotation));
+        var newBullet = Instantiate(bullet, bulletSpawn);
+        newBullet.transform.parent = null;
         Destroy(newBullet,5f);
         var forward = bulletSpawn.forward;
         var force = new Vector3(bulletForce.x * forward.x, bulletForce.y * forward.y, bulletForce.z * forward.z);
         newBullet.AddForce(force);
+        newBullet.transform.localScale = new Vector3(6,8,6);
     }
 }

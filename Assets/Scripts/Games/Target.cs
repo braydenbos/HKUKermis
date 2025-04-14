@@ -20,7 +20,7 @@ namespace Games
                     }));
         }
     
-        public void OnHit()
+        public virtual void OnHit()
         {
             Destroy(gameObject);
             PointsSystem.Instance.ChangePoints(points);

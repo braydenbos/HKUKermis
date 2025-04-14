@@ -45,8 +45,8 @@ namespace Games
         private void ShootTarget()
         {
             var gunLine = Instantiate(lineRenderer, lineParent);
-            Destroy(gunLine.gameObject,1f);
             gunLine.SetPosition(0,lineParent.position);
+            StartCoroutine(BulletFade(gunLine));
             audioSource.PlayOneShot(shootClip);
             
             if (Camera.main == null) return;
@@ -58,6 +58,20 @@ namespace Games
             if (!hit.collider.CompareTag("Target") || !hit.collider.gameObject.TryGetComponent(out Target targetHit)) return;
             audioSource.PlayOneShot(hitClip);
             targetHit.OnHit();
+        }
+
+        private IEnumerator BulletFade(LineRenderer line)
+        {
+            var start = line.GetPosition(0);
+            var multiplier = 1f;
+            while (multiplier > 0)
+            {
+                multiplier -= Time.deltaTime * 1;
+                line.widthMultiplier = multiplier;
+                line.SetPosition(0,Vector3.Lerp(line.GetPosition(1),start,multiplier*5));
+                yield return null;
+            }
+            Destroy(line.gameObject);
         }
     }
 }
